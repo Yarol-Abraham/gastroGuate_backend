@@ -1,13 +1,14 @@
 import json
 from django.shortcuts import render
 from django.views import View
-from .models import tipousuario
+from ..models.modelTipoUsuario import tipousuario
 from django.http.response import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-# Create your views here.
+
+# CRUD PARA TIPO DE USUARIOS.
 class TipoUsuariosView(View):
-    # CRUD BASE DJANGO
+
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
