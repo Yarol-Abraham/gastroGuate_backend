@@ -21,10 +21,14 @@ class DepartamentoView(View):
             _departamento = list(departamento.objects.filter(id=_id).values())
             if len(_departamento) > 0:
                 datos = { 'message': 'success', 'quantity': len(_departamento), 'data': _departamento[0] }
-            else: 
-                _departamento = list(departamento.objects.values())
-                if len(_departamento) > 0:
-                    datos = { 'message': 'success', 'quantity': len(_departamento), 'data': _departamento }
+        else:
+            _departamento = list(departamento.objects.values())
+            if len(_departamento) > 0:
+                datos = { 
+                    'message': 'success',
+                    'quantity': len(_departamento),
+                    'data': _departamento 
+                }
         return JsonResponse(datos)
                     
     def post(self, request):
