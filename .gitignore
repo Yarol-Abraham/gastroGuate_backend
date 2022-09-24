@@ -5,3 +5,4 @@ api/migrations/_pycache_
 api/models/_pycache_
 */_pycache_
 __pycache__/
+gastroGuate/settings.py
