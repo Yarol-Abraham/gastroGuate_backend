@@ -47,3 +47,45 @@ class DepartamentoView(View):
                 }
             }
         return JsonResponse(datos)
+    
+    def put(self, request, _id=0):
+        datos = { 'message': 'fail', 'quantity': 0, 'data': [] }
+        _departamento = object()
+        if _id>0:
+            _departamento=list(departamento.objects.filter(id=_id).values())
+            if len(_departamento)>0:
+                __departamento = departamento.objects.get(id=_id)
+                _departamentoj = json.loads(request.body)
+                __departamento.nombre = _departamentoj['nombre']
+                __departamento.abreviatura = _departamentoj['abreviatura']
+                __departamento.save()
+                datos = {
+                    'message': 'success',
+                    'quantity': 1,
+                    'data': {
+                        'id': _id,
+                        'nombre': _departamentoj['nombre'],
+                        'abreviatura': _departamentoj['abreviatura']
+                    }
+                }
+        return JsonResponse(datos)
+    
+    def delete(self, request, _id=0):
+        datos = { 'message': 'fail', 'quantity': 0, 'data': [] }
+        
+        if _id>0: 
+            _departamento=list(departamento.objects.filter(id=_id).values())
+            if len(_departamento)>0:
+                __departamento = departamento.objects.get(id=_id)
+                _departamentoj = json.loads(request.body)
+                __departamento.estado = _departamentoj['estado']
+                __departamento.save()
+                datos = {
+                    'message': 'success',
+                    'quantity': 1,
+                    'data': {
+                        'id': _id,
+                        'estado': _departamentoj['estado']
+                    }
+                }
+        return JsonResponse(datos)
