@@ -6,3 +6,5 @@ from .models.modelDepartamento import departamento
 # Register your models here.
 admin.site.register(tipousuario)
 admin.site.register(departamento)
+
+#comentario prueba
