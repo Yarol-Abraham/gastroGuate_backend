@@ -15,7 +15,6 @@ class TipoUsuariosView(View):
     
 
     def get(self, request, id=0):
-        
         datos = {
             'message': 'fail',
             'quantity': 0,
