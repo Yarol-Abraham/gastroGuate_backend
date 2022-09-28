@@ -65,7 +65,10 @@ class PlatilloswView(View):
                 __platillos = platillos.objects.get(id=_id)
                 _platillosj = json.loads(request.body)
                 __platillos.nombre = _platillosj['nombre']
-                __platillos.abreviatura = _platillosj['abreviatura']
+                __platillos.descripcion = _platillosj['descripcion']
+                __platillos.precio = _platillosj['precio']
+                __platillos.idUsuario = _platillosj['id_usuario']
+                __platillos.stock = _platillosj['stock']
                 __platillos.save()
                 datos = {
                     'message': 'success',
@@ -73,7 +76,10 @@ class PlatilloswView(View):
                     'data': {
                         'id': _id,
                         'nombre': _platillosj['nombre'],
-                        'abreviatura': _platillosj['abreviatura']
+                        'descripcion': _platillosj['descripcion'],
+                        'precio': _platillosj['precio'],
+                        'id_usuario': _platillosj['id_usuario'],
+                        'id_categoria': _platillosj['id_categoria']
                     }
                 }
         return JsonResponse(datos)
@@ -82,18 +88,18 @@ class PlatilloswView(View):
         datos = { 'message': 'fail', 'quantity': 0, 'data': [] }
         
         if _id>0: 
-            _departamento=list(platillos.objects.filter(id=_id).values())
-            if len(_departamento)>0:
-                __departamento = platillos.objects.get(id=_id)
-                _departamentoj = json.loads(request.body)
-                __departamento.estado = _departamentoj['estado']
-                __departamento.save()
+            _platillos=list(platillos.objects.filter(id=_id).values())
+            if len(_platillos)>0:
+                __platillos = platillos.objects.get(id=_id)
+                _platillosj = json.loads(request.body)
+                __platillos.estado = _platillosj['estado']
+                __platillos.save()
                 datos = {
                     'message': 'success',
                     'quantity': 1,
                     'data': {
                         'id': _id,
-                        'estado': _departamentoj['estado']
+                        'estado': _platillosj['estado']
                     }
                 }
         return JsonResponse(datos)

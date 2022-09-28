@@ -5,7 +5,7 @@ from .controllers.controllerTipoUsuario import TipoUsuariosView
 from .controllers.controllerDepartamento import DepartamentoView
 from .controllers.controllerCategoria import CategoriaView
 from .controllers.controllerUsuario import UsuarioView
-
+from .controllers.controllerPlatillos import PlatilloswView
 urlpatterns = [
     path('tipo/usuarios', TipoUsuariosView.as_view()),
     path('tipo/usuarios/<int:id>', TipoUsuariosView.as_view()),
@@ -17,7 +17,7 @@ urlpatterns = [
     path('usuarios/<int:id>', UsuarioView.as_view()),
     path('municipio/<int:id>', MunicipiosView.as_view()),
     path('municipio', MunicipiosView.as_view()),
-    path('platillos', MunicipiosView.as_view()),
-    path('platillos/<int:id>', MunicipiosView.as_view())
+    path('platillos', PlatilloswView.as_view()),
+    path('platillos/<int:_id>', PlatilloswView.as_view())
 ]
 
