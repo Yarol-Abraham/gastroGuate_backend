@@ -37,20 +37,21 @@ class PlatilloswView(View):
         jd = json.loads(request.body)
         _descripcion=jd['descripcion']
         _precio=jd['precio']
-        id_usuario_id=jd['usuario']
-        id_categoria_id=jd['categoria']
-        print(_descripcion == '')
-        if _descripcion == '' or _precio == '' or id_usuario_id == '' or id_categoria_id == '':
+        id_usuario=jd['id_usuario']
+        id_categoria=jd['id_categoria']
+        _stock=jd['stock']
+        if _descripcion == '' or _precio == '' or id_usuario == '' or id_categoria == '' or _stock == '':
             datos = { 'message': 'existen campos vacios', 'quantity': 0, 'data': [] }
             return JsonResponse(datos)
-        platillos.objects.create(descripcion=_descripcion,precio=_precio,id_usuario=id_usuario_id,id_categoria=id_categoria_id)
+        platillos.objects.create(descripcion=_descripcion,precio=_precio,id_usuario_id=id_usuario,id_categoria_id=id_categoria,stock=_stock)
         datos = {
                 'message': 'success',
                 'data': {
                     'descripcion' : _descripcion,
                     'precio': _precio,
-                    'id_usuario': id_usuario_id,
-                    'id_categoria': id_categoria_id
+                    'id_usuario': id_usuario,
+                    'id_categoria': id_categoria,
+                    'stock' : _stock
                 }
             }
         return JsonResponse(datos)        
