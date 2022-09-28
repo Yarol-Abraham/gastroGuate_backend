@@ -16,6 +16,8 @@ urlpatterns = [
     path('usuarios', UsuarioView.as_view()),
     path('usuarios/<int:id>', UsuarioView.as_view()),
     path('municipio/<int:id>', MunicipiosView.as_view()),
-    path('municipio', MunicipiosView.as_view())
+    path('municipio', MunicipiosView.as_view()),
+    path('platillos', MunicipiosView.as_view()),
+    path('platillos/<int:id>', MunicipiosView.as_view())
 ]
 
