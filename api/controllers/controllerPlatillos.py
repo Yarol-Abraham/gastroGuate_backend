@@ -63,10 +63,10 @@ class PlatilloswView(View):
             if len(_platillos)>0:
                 __platillos = platillos.objects.get(id=_id)
                 _platillosj = json.loads(request.body)
-                __platillos.nombre = _platillosj['nombre']
                 __platillos.descripcion = _platillosj['descripcion']
                 __platillos.precio = _platillosj['precio']
                 __platillos.id_usuario_id = _platillosj['id_usuario']
+                __platillos.id_categoria_id = _platillosj['id_categoria']
                 __platillos.stock = _platillosj['stock']
                 __platillos.save()
                 datos = {
@@ -74,11 +74,11 @@ class PlatilloswView(View):
                     'quantity': 1,
                     'data': {
                         'id': _id,
-                        'nombre': _platillosj['nombre'],
                         'descripcion': _platillosj['descripcion'],
                         'precio': _platillosj['precio'],
                         'id_usuario': _platillosj['id_usuario'],
-                        'id_categoria': _platillosj['id_categoria']
+                        'id_categoria': _platillosj['id_categoria'],
+                        'stock': _platillosj['stock']
                     }
                 }
         return JsonResponse(datos)
