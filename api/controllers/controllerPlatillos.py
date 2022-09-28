@@ -66,7 +66,7 @@ class PlatilloswView(View):
                 __platillos.nombre = _platillosj['nombre']
                 __platillos.descripcion = _platillosj['descripcion']
                 __platillos.precio = _platillosj['precio']
-                __platillos.idUsuario = _platillosj['id_usuario']
+                __platillos.id_usuario_id = _platillosj['id_usuario']
                 __platillos.stock = _platillosj['stock']
                 __platillos.save()
                 datos = {
