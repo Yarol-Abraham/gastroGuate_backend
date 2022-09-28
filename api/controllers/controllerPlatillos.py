@@ -1,4 +1,3 @@
-from curses.ascii import isalnum
 import json
 from django.shortcuts import render
 from django.views import View
