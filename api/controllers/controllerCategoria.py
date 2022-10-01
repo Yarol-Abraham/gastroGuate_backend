@@ -1,5 +1,4 @@
 import json
-from django.shortcuts import render
 from django.views import View
 from ..models.modelCategoria import categoria
 from django.http.response import JsonResponse

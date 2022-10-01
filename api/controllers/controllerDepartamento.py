@@ -1,6 +1,4 @@
-from ast import operator
 import json
-from django.shortcuts import render
 from django.views import View
 from ..models.modelDepartamento import departamento
 from django.http.response import JsonResponse

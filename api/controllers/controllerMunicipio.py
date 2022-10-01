@@ -1,7 +1,4 @@
-from ast import Delete
-from email.quoprimime import body_check
 import json
-from django.shortcuts import render
 from django.views import View
 from ..models.modelMunicipio import municipio
 from django.http.response import JsonResponse
