@@ -16,11 +16,11 @@ class DepartamentoView(View):
         datos = { 'message': 'fail', 'quantity': 0, 'data': [] }
 
         if _id > 0: 
-            _departamento = list(departamento.objects.filter(id=_id).values())
+            _departamento = list(departamento.objects.filter(id=_id,estado=1).values())
             if len(_departamento) > 0:
                 datos = { 'message': 'success', 'quantity': len(_departamento), 'data': _departamento[0] }
         else:
-            _departamento = list(departamento.objects.values())
+            _departamento = list(departamento.objects.filter(estado=1).values())
             if len(_departamento) > 0:
                 datos = { 
                     'message': 'success',
@@ -54,7 +54,7 @@ class DepartamentoView(View):
         datos = { 'message': 'fail', 'quantity': 0, 'data': [] }
         _departamento = object()
         if _id>0:
-            _departamento=list(departamento.objects.filter(id=_id).values())
+            _departamento=list(departamento.objects.filter(id=_id,estado=1).values())
             if len(_departamento)>0:
                 __departamento = departamento.objects.get(id=_id)
                 _departamentoj = json.loads(request.body)

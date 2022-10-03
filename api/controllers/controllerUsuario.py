@@ -23,7 +23,7 @@ class UsuarioView(View):
         }
 
         if id > 0:
-            _usuario = list(usuario.objects.filter(id=id).values())
+            _usuario = list(usuario.objects.filter(id=id,estado=1).values())
             if len(_usuario) > 0:
                 datos = { 
                     'message': 'success',
@@ -31,7 +31,7 @@ class UsuarioView(View):
                     'data': _usuario[0] 
                 }
         else:    
-            _usuario = list(usuario.objects.values())
+            _usuario = list(usuario.objects.filter(estado=1).values())
             if len(_usuario) > 0:
                 datos = { 
                     'message': 'success',

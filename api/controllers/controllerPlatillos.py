@@ -17,11 +17,11 @@ class PlatilloswView(View):
             datos = { 'message': 'fail', 'quantity': 0, 'data': [] }
 
             if _id > 0: 
-                _platillos = list(platillos.objects.filter(id=_id).values())
+                _platillos = list(platillos.objects.filter(id=_id,estado=1).values())
                 if len(_platillos) > 0:
                     datos = { 'message': 'success', 'quantity': len(_platillos), 'data': _platillos[0] }
             else:
-                _platillos = list(platillos.objects.values())
+                _platillos = list(platillos.objects.filter(estado=1).values())
                 if len(_platillos) > 0:
                     datos = { 
                         'message': 'success',

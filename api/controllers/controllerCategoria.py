@@ -22,7 +22,7 @@ class CategoriaView(View):
         }
 
         if id > 0:
-            _categoria = list(categoria.objects.filter(id=id).values())
+            _categoria = list(categoria.objects.filter(id=id,estado=1).values())
             if len(_categoria) > 0:
                 datos = { 
                     'message': 'success',
@@ -30,7 +30,7 @@ class CategoriaView(View):
                     'data': _categoria[0] 
                 }
         else:    
-            _categoria = list(categoria.objects.values())
+            _categoria = list(categoria.objects.filter(estado=1).values())
             if len(_categoria) > 0:
                 datos = { 
                     'message': 'success',
@@ -62,7 +62,7 @@ class CategoriaView(View):
         }
 
         if id > 0:
-            _categoria = list(categoria.objects.filter(id=id).values())
+            _categoria = list(categoria.objects.filter(id=id,estado=1).values())
             if len(_categoria) > 0:
                 __categoria = categoria.objects.get(id=id)
                 jd = json.loads(request.body)
@@ -89,7 +89,7 @@ class CategoriaView(View):
         }
 
         if id > 0:
-            _categoria = list(categoria.objects.filter(id=id).values())
+            _categoria = list(categoria.objects.filter(id=id,estado=1).values())
             if len(_categoria) > 0:
                 __categoria = categoria.objects.get(id=id)
                 jd = json.loads(request.body)

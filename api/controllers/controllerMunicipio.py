@@ -20,7 +20,7 @@ class MunicipiosView(View):
             'data':[]
         }
         if id>0:
-            _municipio = list(municipio.objects.filter(id=id))
+            _municipio = list(municipio.objects.filter(id=id,estado=1))
             if len(_municipio) > 0 :
                 datos = {
                     'message': 'success',
@@ -28,7 +28,7 @@ class MunicipiosView(View):
                     'data': _municipio[0] 
                 }
         else:
-            _municipio = list(municipio.objects.values())
+            _municipio = list(municipio.objects.filter(estado=1).values())
             if len(_municipio) > 0:
                 datos = {
                     'message': 'success',
@@ -89,7 +89,7 @@ class MunicipiosView(View):
             'data': {}
         }
         if id>0:  
-            _municipio = list(municipio.objects.filter(id=id).values())
+            _municipio = list(municipio.objects.filter(id=id,estado=1).values())
             if len(_municipio)>0:
                 __municipio = municipio.objects.get(id=id)
                 _municipioj = json.loads(request.body)

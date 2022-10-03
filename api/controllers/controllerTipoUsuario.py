@@ -22,7 +22,7 @@ class TipoUsuariosView(View):
         }
 
         if id > 0:
-            _tipousuario = list(tipousuario.objects.filter(id=id).values())
+            _tipousuario = list(tipousuario.objects.filter(id=id,estado=1).values())
             if len(_tipousuario) > 0:
                 datos = { 
                     'message': 'success',
@@ -30,7 +30,7 @@ class TipoUsuariosView(View):
                     'data': _tipousuario[0] 
                 }
         else:    
-            _tipousuario = list(tipousuario.objects.values())
+            _tipousuario = list(tipousuario.objects.filter(estado=1).values())
             if len(_tipousuario) > 0:
                 datos = { 
                     'message': 'success',
