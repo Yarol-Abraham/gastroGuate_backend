@@ -10,3 +10,4 @@ class platillos(models.Model):
     id_categoria=models.ForeignKey(categoria, on_delete=models.DO_NOTHING)
     stock=models.IntegerField(max_length=11)
     estado=models.IntegerField(max_length=11,default=1)
+    oferta=models.IntegerField(max_length=11,default=0)
