@@ -1,3 +1,4 @@
+from enum import unique
 from django.db import models
 from .modelTipoUsuario import tipousuario
 from .modelMunicipio import municipio
@@ -5,7 +6,7 @@ from .modelMunicipio import municipio
 class usuario(models.Model):
     nombre=models.CharField(max_length=200)
     apellido=models.CharField(max_length=200)
-    usuario=models.CharField(max_length=200)
+    usuario=models.CharField(max_length=200,unique=True)
     password=models.CharField(max_length=200)
     identificacion=models.CharField(max_length=100)
     fecha_creacion=models.DateTimeField(auto_now_add=True)

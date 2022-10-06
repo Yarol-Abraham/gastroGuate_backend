@@ -7,6 +7,7 @@ from .controllers.controllerCategoria import CategoriaView
 from .controllers.controllerUsuario import UsuarioView
 from .controllers.controllerPlatillos import PlatilloswView
 from .controllers.controllerPedidos import PedidosView
+from .controllers.controllerAuth import LoginView
 
 urlpatterns = [
     path('tipo/usuarios', TipoUsuariosView.as_view()),
@@ -22,6 +23,7 @@ urlpatterns = [
     path('platillos', PlatilloswView.as_view()),
     path('platillos/<int:_id>', PlatilloswView.as_view()),
     path('pedidos', PedidosView.as_view()),
-    path('pedidos/<int:_id>', PedidosView.as_view())
+    path('pedidos/<int:_id>', PedidosView.as_view()),
+    path('login', LoginView.as_view())
 ]
 

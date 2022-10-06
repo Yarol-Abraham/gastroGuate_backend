@@ -12,7 +12,6 @@ class CategoriaView(View):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
     
-
     def get(self, request, id=0):
         
         datos = {
@@ -79,7 +78,6 @@ class CategoriaView(View):
 
         return JsonResponse(datos)
 
-        
     def delete(self, request, id=0):
         
         datos = {
