@@ -20,7 +20,7 @@ class MunicipiosView(View):
             'data':[]
         }
         if id>0:
-            _municipio = list(municipio.objects.filter(id=id,estado=1))
+            _municipio = list(municipio.objects.filter(id=id,estado=1).values())
             if len(_municipio) > 0 :
                 datos = {
                     'message': 'success',

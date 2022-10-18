@@ -8,7 +8,7 @@ from .controllers.controllerUsuario import UsuarioView
 from .controllers.controllerPlatillos import PlatilloswView
 from .controllers.controllerPedidos import PedidosView
 from .controllers.controllerAuth import LoginView
-
+from .controllers.controllerUserAuth import UserView
 urlpatterns = [
     path('tipo/usuarios', TipoUsuariosView.as_view()),
     path('tipo/usuarios/<int:id>', TipoUsuariosView.as_view()),
@@ -24,6 +24,8 @@ urlpatterns = [
     path('platillos/<int:_id>', PlatilloswView.as_view()),
     path('pedidos', PedidosView.as_view()),
     path('pedidos/<int:_id>', PedidosView.as_view()),
-    path('login', LoginView.as_view())
+    path('login', LoginView.as_view()),
+    path('user', UserView.as_view()),
+    path('user/<int:id>', UserView.as_view())
 ]
 

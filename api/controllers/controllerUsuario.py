@@ -1,5 +1,4 @@
 import json
-from django.shortcuts import render
 from django.views import View
 from ..models.modelUsuario import usuario
 from django.contrib.auth.models import User
@@ -7,40 +6,12 @@ from django.http.response import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
-
-# CRUD PARA TIPO DE USUARIOS.
+# CRUD PARA USUARIOS.
 class UsuarioView(View):
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
-  
-    def get(self, request, id=0):
-        
-        datos = {
-            'message': 'fail',
-            'quantity': 0,
-            'data': []
-        }
-
-        if id > 0:
-            _usuario = list(usuario.objects.filter(id=id,estado=1).values())
-            if len(_usuario) > 0:
-                datos = { 
-                    'message': 'success',
-                    'quantity': len(_usuario),
-                    'data': _usuario[0] 
-                }
-        else:    
-            _usuario = list(usuario.objects.filter(estado=1).values())
-            if len(_usuario) > 0:
-                datos = { 
-                    'message': 'success',
-                    'quantity': len(_usuario),
-                    'data': _usuario 
-                }
-           
-        return JsonResponse(datos)
 
     def post(self, request):
         # RESPUESTA POR DEFECTO
@@ -89,61 +60,61 @@ class UsuarioView(View):
 
     def put(self, request, id=0):
             
-            datos = {
-                'message': 'fail',
-                'quantity': 0,
-                'data': {}
-            }
+        datos = {
+            'message': 'fail',
+            'quantity': 0,
+            'data': {}
+        }
 
-            if id > 0:
-                    __usuario = list(usuario.objects.filter(id=id).values())
-                    if len(__usuario) > 0:
-                        _usuario = usuario.objects.get(id=id)
-                        _user = User.objects.get()
-                        jd = json.loads(request.body)
-                        _usuario.nombre = jd['nombre']
-                        _usuario.apellido = jd['apellido']
-                        _usuario.usuario = jd['usuario']
-                        _usuario.identificacion = jd['identificacion']
-                        _usuario.id_tipousuario_id = jd['idTipoUsuario']
-                        _usuario.id_municipio_id = jd['idMunicipio']
-                        
-                        _usuario.save()
-                        datos = {
-                            'message': 'success',
-                            'quantity': 1,
-                            'data': {
-                                'id': id,
-                                'nombre': jd['nombre'],
-                                'apellido': jd['apellido'],
-                                'usuario': jd['usuario'],
-                                'identificacion': jd['identificacion'],
-                                'idTipoUsuario': jd['idTipoUsuario'],
-                                'idMunicipio': jd['idMunicipio']
-                            }
-                        }
-
-            return JsonResponse(datos)
-
-    def delete(self,request, id=0):
-            datos = {
-                'message': 'fail',
-                'quantity': 0,
-                'data': {}
-            }
-            if id>0:  
-                _usuario = list(usuario.objects.filter(id=id).values())
-                if len(_usuario)>0:
+        if id > 0:
+                __usuario = list(usuario.objects.filter(id=id).values())
+                if len(__usuario) > 0:
                     _usuario = usuario.objects.get(id=id)
-                    __usuario = json.loads(request.body)
-                    _usuario.estado = __usuario['estado']
+                    _user = User.objects.get()
+                    jd = json.loads(request.body)
+                    _usuario.nombre = jd['nombre']
+                    _usuario.apellido = jd['apellido']
+                    _usuario.usuario = jd['usuario']
+                    _usuario.identificacion = jd['identificacion']
+                    _usuario.id_tipousuario_id = jd['idTipoUsuario']
+                    _usuario.id_municipio_id = jd['idMunicipio']
+                    
                     _usuario.save()
                     datos = {
-                            'message': 'success',
-                            'quantity': 1,
-                            'data': {
-                                'id': id,
-                                'estado': __usuario['estado']
-                            }
+                        'message': 'success',
+                        'quantity': 1,
+                        'data': {
+                            'id': id,
+                            'nombre': jd['nombre'],
+                            'apellido': jd['apellido'],
+                            'usuario': jd['usuario'],
+                            'identificacion': jd['identificacion'],
+                            'idTipoUsuario': jd['idTipoUsuario'],
+                            'idMunicipio': jd['idMunicipio']
                         }
-            return JsonResponse(datos)        
+                    }
+
+        return JsonResponse(datos)
+
+    def delete(self,request, id=0):
+        datos = {
+            'message': 'fail',
+            'quantity': 0,
+            'data': {}
+        }
+        if id>0:  
+            _usuario = list(usuario.objects.filter(id=id).values())
+            if len(_usuario)>0:
+                _usuario = usuario.objects.get(id=id)
+                __usuario = json.loads(request.body)
+                _usuario.estado = __usuario['estado']
+                _usuario.save()
+                datos = {
+                        'message': 'success',
+                        'quantity': 1,
+                        'data': {
+                            'id': id,
+                            'estado': __usuario['estado']
+                        }
+                    }
+        return JsonResponse(datos)        

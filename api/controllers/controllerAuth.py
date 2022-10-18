@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
-from django.contrib.auth.models import User
+
 # CRUD PARA LOGIN DE USUARIOS.
 class LoginView(View):
 
