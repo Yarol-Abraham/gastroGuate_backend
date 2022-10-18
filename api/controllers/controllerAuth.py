@@ -25,8 +25,17 @@ class LoginView(View):
             _user = User.objects.get(username=_usuarioj['usuario'])
             # VALIDAR LA CONTRASEÑA
             if check_password(_usuarioj['password'], _user.password):
+                _userinfo = usuario.objects.get(usuario=_usuarioj['usuario'])
                 token, created = Token.objects.get_or_create(user=_user)
-                datos = { 'message': 'success', 'quantity': 1, 'data': token.key }
+                datos = { 'message': 'success', 'quantity': 1,'token': token.key, 'user':{
+                    "id": _userinfo.id,  # type: ignore
+                    "nombre": _userinfo.nombre,
+                    "apellido": _userinfo.apellido,
+                    "identificacion": _userinfo.identificacion,
+                    "idTipoUsuario": _userinfo.id_tipousuario_id, # type: ignore
+                    "idMunicipio": _userinfo.id_municipio_id, # type: ignore
+                    "usuario": _userinfo.usuario
+                }}
                 return JsonResponse(datos)
             else:
                 return JsonResponse(datos)

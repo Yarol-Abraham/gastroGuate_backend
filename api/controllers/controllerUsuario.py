@@ -70,14 +70,13 @@ class UsuarioView(View):
                 __usuario = list(usuario.objects.filter(id=id).values())
                 if len(__usuario) > 0:
                     _usuario = usuario.objects.get(id=id)
-                    _user = User.objects.get()
                     jd = json.loads(request.body)
                     _usuario.nombre = jd['nombre']
                     _usuario.apellido = jd['apellido']
                     _usuario.usuario = jd['usuario']
                     _usuario.identificacion = jd['identificacion']
-                    _usuario.id_tipousuario_id = jd['idTipoUsuario']
-                    _usuario.id_municipio_id = jd['idMunicipio']
+                    _usuario.id_tipousuario_id = jd['idTipoUsuario']  # type: ignore
+                    _usuario.id_municipio_id = jd['idMunicipio']  # type: ignore
                     
                     _usuario.save()
                     datos = {
