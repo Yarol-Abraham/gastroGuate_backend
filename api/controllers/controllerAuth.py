@@ -17,7 +17,7 @@ class LoginView(View):
     
     def post(self, request):
         _usuarioj = json.loads(request.body)
-        datos = { 'message': 'usuario o contraseña son incorrectas', 'quantity': 0, 'data': [] }
+        datos = { 'message': 'usuario o contraseña son incorrectas', 'quantity': 0, 'data': {} }
         # BUSCAR SI EXISTE EL USUARIO
         usuarios = list(usuario.objects.filter(usuario=_usuarioj['usuario']).values())
         if len(usuarios) > 0:
@@ -27,7 +27,7 @@ class LoginView(View):
             if check_password(_usuarioj['password'], _user.password):
                 _userinfo = usuario.objects.get(usuario=_usuarioj['usuario'])
                 token, created = Token.objects.get_or_create(user=_user)
-                datos = { 'message': 'success', 'quantity': 1,'token': token.key, 'user':{
+                datos = { 'message': 'success', 'quantity': 1,'token': token.key, 'data':{
                     "id": _userinfo.id,  # type: ignore
                     "nombre": _userinfo.nombre,
                     "apellido": _userinfo.apellido,
