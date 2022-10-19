@@ -3,6 +3,9 @@ from django.db import models
 from .modelUsuario import usuario
 from .modelCategoria import categoria
 
+def upload_to(instance, filename):
+    return 'images/{filename}'.format(filename=filename)
+
 class platillos(models.Model):
     descripcion=models.CharField(max_length=200)
     precio=models.FloatField(max_length=200)
@@ -11,3 +14,4 @@ class platillos(models.Model):
     stock=models.IntegerField(max_length=11)
     estado=models.IntegerField(max_length=11,default=1)
     oferta=models.IntegerField(max_length=11,default=0)
+    image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)

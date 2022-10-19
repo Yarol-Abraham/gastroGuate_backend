@@ -1,11 +1,12 @@
 import json
-from django.views import View
+from rest_framework.views import APIView
+from api.serializer import PlatillosSerializer
 from ..models.modelPlatillos import platillos
 from django.http.response import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
-class PlatilloswView(View):
+class PlatilloswView(APIView):
     
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -33,7 +34,8 @@ class PlatilloswView(View):
         # RESPUESTA POR DEFECTO
         datos = { 'message': 'fail', 'quantity': 0, 'data': [] }
         # LEEMOS LOS DATOS ENVIADOS POR EL USUARIO
-        jd = json.loads(request.body)
+        #jd = json.loads(request.data)
+        jd = request.data
         _descripcion=jd['descripcion']
         _precio=jd['precio']
         id_usuario=jd['id_usuario']
@@ -42,7 +44,10 @@ class PlatilloswView(View):
         if _descripcion == '' or _precio == '' or id_usuario == '' or id_categoria == '' or _stock == '':
             datos = { 'message': 'existen campos vacios', 'quantity': 0, 'data': [] }
             return JsonResponse(datos)
-        platillos.objects.create(descripcion=_descripcion,precio=_precio,id_usuario_id=id_usuario,id_categoria_id=id_categoria,stock=_stock)
+        serializer=PlatillosSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+      #  platillos.objects.create(descripcion=_descripcion,precio=_precio,id_usuario_id=id_usuario,id_categoria_id=id_categoria,stock=_stock)
         datos = {
                 'message': 'success',
                 'data': {
