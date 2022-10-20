@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 from .modelUsuario import usuario
@@ -14,4 +15,5 @@ class platillos(models.Model):
     stock=models.IntegerField(max_length=11)
     estado=models.IntegerField(max_length=11,default=1)
     oferta=models.IntegerField(max_length=11,default=0)
+    precio_oferta=models.FloatField(max_length=200, default = 0)
     image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)
