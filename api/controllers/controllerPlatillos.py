@@ -12,12 +12,20 @@ class PlatilloswView(APIView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
-    def get(self, request, _id=0):
+    def get(self, request, _id=0, id_categoria=0):
             _platillos={}
             datos = { 'message': 'fail', 'quantity': 0, 'data': [] }
 
-            if _id > 0: 
+            if _id > 0 and id_categoria == 0: 
                 _platillos = list(platillos.objects.filter(id=_id,estado=1).values())
+                if len(_platillos) > 0:
+                    datos = { 'message': 'success', 'quantity': len(_platillos), 'data': _platillos[0] }
+            elif _id == 0 and id_categoria > 0:
+                _platillos = list(platillos.objects.filter(estado=1,id_categoria_id=id_categoria).values())
+                if len(_platillos) > 0:
+                    datos = { 'message': 'success', 'quantity': len(_platillos), 'data': _platillos }
+            elif _id > 0 and id_categoria > 0:
+                _platillos = list(platillos.objects.filter(id=_id,estado=1,id_categoria_id=id_categoria).values())
                 if len(_platillos) > 0:
                     datos = { 'message': 'success', 'quantity': len(_platillos), 'data': _platillos[0] }
             else:
