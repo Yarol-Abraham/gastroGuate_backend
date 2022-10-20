@@ -34,7 +34,6 @@ class PlatilloswView(APIView):
         # RESPUESTA POR DEFECTO
         datos = { 'message': 'fail', 'quantity': 0, 'data': [] }
         # LEEMOS LOS DATOS ENVIADOS POR EL USUARIO
-        #jd = json.loads(request.data)
         jd = request.data
         _descripcion=jd['descripcion']
         _precio=jd['precio']
@@ -47,7 +46,6 @@ class PlatilloswView(APIView):
         serializer=PlatillosSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-      #  platillos.objects.create(descripcion=_descripcion,precio=_precio,id_usuario_id=id_usuario,id_categoria_id=id_categoria,stock=_stock)
         datos = {
                 'message': 'success',
                 'data': {
@@ -67,12 +65,13 @@ class PlatilloswView(APIView):
             _platillos=list(platillos.objects.filter(id=_id).values())
             if len(_platillos)>0:
                 __platillos = platillos.objects.get(id=_id)
-                _platillosj = json.loads(request.body)
+                _platillosj = request.data
                 __platillos.descripcion = _platillosj['descripcion']
                 __platillos.precio = _platillosj['precio']
                 __platillos.id_usuario_id = _platillosj['id_usuario']
                 __platillos.id_categoria_id = _platillosj['id_categoria']
                 __platillos.stock = _platillosj['stock']
+                __platillos.image_url = _platillosj['image_url']
                 __platillos.save()
                 datos = {
                     'message': 'success',
