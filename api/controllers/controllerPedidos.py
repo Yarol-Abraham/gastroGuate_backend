@@ -16,14 +16,22 @@ class PedidosView(APIView):
         return super().dispatch(request, *args, **kwargs)
 
     # LOS PEDIDOS INDIVIDUALES SOLO SE PUEDEN OBTENER POR EL ID DEL USUARIO
-    def get(self, request, _id=0):
+    def get(self, request, _id = 0, _id_usuario=0):
         _pedidos={}
         datos = { 'message': 'fail', 'quantity': 0, 'data': [] }
 
-        if _id > 0: 
-            _pedidos = list(pedidos.objects.filter(id_usuario_id=_id,estado=1).values())
+        if _id == 0 and _id_usuario > 0: 
+            _pedidos = list(pedidos.objects.filter(id_usuario_id=_id_usuario,estado=1).values())
             if len(_pedidos) > 0:
-                datos = { 'message': 'success', 'quantity': len(_pedidos), 'data': _pedidos[0] }
+                datos = { 'message': 'success', 'quantity': len(_pedidos), 'data': _pedidos }
+        elif _id > 0 and _id_usuario == 0:
+            _pedidos = list(pedidos.objects.filter(id=_id,estado=1).values())
+            if len(_pedidos) > 0:
+                datos = { 'message': 'success', 'quantity': len(_pedidos), 'data': _pedidos[0] }    
+        elif _id > 0 and _id_usuario > 0:
+            _pedidos = list(pedidos.objects.filter(id=_id,id_usuario_id=_id_usuario,estado=1).values())
+            if len(_pedidos) > 0:
+                datos = { 'message': 'success', 'quantity': len(_pedidos), 'data': _pedidos[0] }    
         else:
             _pedidos = list(pedidos.objects.filter(estado=1).values())
             if len(_pedidos) > 0:

@@ -23,7 +23,7 @@ urlpatterns = [
     path('platillos', PlatilloswView.as_view()),
     path('platillos/<int:_id>/<int:id_categoria>', PlatilloswView.as_view()),
     path('pedidos', PedidosView.as_view()),
-    path('pedidos/<int:_id>', PedidosView.as_view()),
+    path('pedidos/<int:_id>/<int:_id_usuario>', PedidosView.as_view()),
     path('login', LoginView.as_view()),
     path('user', UserView.as_view()),
     path('user/<int:id>', UserView.as_view())
