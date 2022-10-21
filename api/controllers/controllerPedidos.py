@@ -15,12 +15,13 @@ class PedidosView(APIView):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
+    # LOS PEDIDOS INDIVIDUALES SOLO SE PUEDEN OBTENER POR EL ID DEL USUARIO
     def get(self, request, _id=0):
         _pedidos={}
         datos = { 'message': 'fail', 'quantity': 0, 'data': [] }
 
         if _id > 0: 
-            _pedidos = list(pedidos.objects.filter(id=_id,estado=1).values())
+            _pedidos = list(pedidos.objects.filter(id_usuario_id=_id,estado=1).values())
             if len(_pedidos) > 0:
                 datos = { 'message': 'success', 'quantity': len(_pedidos), 'data': _pedidos[0] }
         else:
