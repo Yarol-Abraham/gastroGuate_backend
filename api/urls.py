@@ -18,7 +18,7 @@ urlpatterns = [
     path('departamentos/<int:_id>', DepartamentoView.as_view()),
     path('usuarios', UsuarioView.as_view()),
     path('usuarios/<int:id>', UsuarioView.as_view()),
-    path('municipio/<int:id>', MunicipiosView.as_view()),
+    path('municipio/<int:id>/<int:id_departamento>', MunicipiosView.as_view()),
     path('municipio', MunicipiosView.as_view()),
     path('platillos', PlatilloswView.as_view()),
     path('platillos/<int:_id>/<int:id_categoria>', PlatilloswView.as_view()),

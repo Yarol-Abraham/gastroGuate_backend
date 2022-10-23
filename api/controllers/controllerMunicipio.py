@@ -13,19 +13,27 @@ class MunicipiosView(View):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
     
-    def get(self, request, id=0):
+    def get(self, request, id=0, id_departamento=0):
         datos = {
             'message': 'fail',
             'quantity': 0,
             'data':[]
         }
-        if id>0:
+        if id > 0 and id_departamento == 0:
             _municipio = list(municipio.objects.filter(id=id,estado=1).values())
             if len(_municipio) > 0 :
                 datos = {
                     'message': 'success',
                     'quantity': len(_municipio),
                     'data': _municipio[0] 
+                }
+        elif id == 0 and id_departamento > 0:
+            _municipio = list(municipio.objects.filter(id_departamento_id=id_departamento,estado=1).values())
+            if len(_municipio) > 0 :
+                datos = {
+                    'message': 'success',
+                    'quantity': len(_municipio),
+                    'data': _municipio
                 }
         else:
             _municipio = list(municipio.objects.filter(estado=1).values())
