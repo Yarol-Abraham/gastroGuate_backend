@@ -34,7 +34,8 @@ class LoginView(View):
                     "identificacion": _userinfo.identificacion,
                     "idTipoUsuario": _userinfo.id_tipousuario_id, # type: ignore
                     "idMunicipio": _userinfo.id_municipio_id, # type: ignore
-                    "usuario": _userinfo.usuario
+                    "usuario": _userinfo.usuario,
+                    "correo": _user.email
                 }}
                 return JsonResponse(datos)
             else:
